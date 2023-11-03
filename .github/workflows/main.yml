@@ -18,9 +18,4 @@ jobs:
         with:
           target: 'http://testphp.vulnweb.com/'  # Replace with your target URL
 
-      - name: Save OWASP ZAP Report
-        uses: actions/upload-artifact@v2
-        with:
-          name: zap-report
-          path: ${{ github.workspace }}/reports  # Path to the ZAP scan reports
 
