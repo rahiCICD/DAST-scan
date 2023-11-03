@@ -1,6 +1,9 @@
-name: Dastardly Action
+name: OWASP ZAP Baseline Scan
 
-on: [push]
+on:
+  push:
+    branches:
+      - main  
 
 jobs:
   scan:
@@ -10,7 +13,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Run Dastardly Action Step
-        uses: PortSwigger/dastardly-github-action@main
+      - name: Run OWASP ZAP Baseline Scan
+        uses: owasp/zap-full-scan@v0.0.5
         with:
-          target-url: 'http://testphp.vulnweb.com/'
+          target: 'http://testphp.vulnweb.com/'  # Replace with your target URL
+
+      - name: Save OWASP ZAP Report
+        uses: actions/upload-artifact@v2
+        with:
+          name: zap-report
+          path: ${{ github.workspace }}/reports  # Path to the ZAP scan reports
+
